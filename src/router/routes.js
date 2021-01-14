@@ -14,6 +14,13 @@ const routes = [
       { path: 'record', component: () => import('pages/record.vue') }
     ]
   },
+  {
+    path: '/',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: 'history', component: () => import('pages/history.vue') }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it
