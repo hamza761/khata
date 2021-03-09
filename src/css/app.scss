@@ -1,1 +1,58 @@
-// app global css in SCSS form
+.themelight {
+    background: #f1f1f1;
+    color: #f39c12;
+    font-family: comfortaa;
+    .q-btn {
+        font-size: 9px;
+        padding: 5px 0px;
+        margin-top: 10px;
+        border-radius: 5px;
+        color: #f39c12;
+        background: #e6e5e5;
+
+        box-shadow: inset 8px 8px 16px rgba(0, 0, 0, 0.1), inset -4px -4px 8px rgba(255, 255, 255, 0.5);
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+    .clr {
+        background: #f39c12;
+        color: wheat;
+    }
+    .recorddiv {
+        color: #f39c12;
+        border-left: 2px solid #f39c12;
+    }
+    .q-header {
+        background: #f1f1f1;
+        color: #f39c12;
+    }
+}
+
+.themedark {
+    background: #272727;
+    color: #f39c12;
+    font-family: comfortaa;
+    .q-btn {
+        font-size: 8px;
+        font-weight: bolder;
+        padding: 0px;
+        margin-top: 10px;
+        border-radius: 5px;
+        color: #f39c12;
+        background: #444040;
+        
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+    }
+    .clr {
+        background: #f39c12;
+        color: wheat;
+    }
+    .recorddiv {
+        color: #f39c12;
+        border-left: 2px solid #f39c12;
+    }
+    .q-header {
+        background: #272727;
+        color: #f39c12;
+    }
+    
+}

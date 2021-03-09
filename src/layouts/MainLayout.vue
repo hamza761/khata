@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header>
       <q-toolbar>
         <q-btn
           flat
@@ -10,12 +10,39 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="text-center" style="font-weight: bold">
+          Khata
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>
+          <span @click="prompt = !prompt" class="text-h5 mdi mdi-plus"></span>
+          <q-dialog v-model="prompt" persistent>
+            <q-card class="addNew" style="min-width: 250px">
+              <q-card-section>
+                <div class="text-h6">Your address</div>
+              </q-card-section>
+
+              <q-card-section class="q-pt-none">
+                <q-input
+                  dense
+                  v-model="incomeDescription"
+                  placeholder="Enter Income Source..."
+                  autofocus
+                />
+                <q-input
+                  dense
+                  placeholder="Enter Income..."
+                  v-model="incomeValue"
+                />
+              </q-card-section>
+
+              <q-card-actions align="right" class="text-primary">
+                <q-btn flat label="Cancel" v-close-popup />
+                <q-btn flat label="Add" @click="add()" v-close-popup />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -26,10 +53,7 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header class="text-grey-8">
           Essential Links
         </q-item-label>
         <EssentialLink
@@ -37,6 +61,15 @@
           :key="link.title"
           v-bind="link"
         />
+        <div
+          class="row  items-center"
+          @click="changeTheme()"
+          style="width: 100%; margin-left:20px;height: 40px"
+
+        >
+          <span class="mdi mdi-file-replace-outline text-h6 " style="margin-right:33px;"></span>
+          Change Theme
+        </div>
       </q-list>
     </q-drawer>
 
@@ -47,61 +80,48 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-
+import EssentialLink from "components/EssentialLink.vue";
+import { mapFields } from "vuex-map-fields";
 const linksData = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: "Docs",
+    caption: "quasar.dev",
+    icon: "school",
+    link: "https://quasar.dev",
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: "Github",
+    caption: "github.com/quasarframework",
+    icon: "code",
+    link: "https://github.com/quasarframework",
   },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
 ];
 
 export default {
-  name: 'MainLayout',
+  name: "MainLayout",
   components: { EssentialLink },
-  data () {
+  data() {
     return {
+      incomeDescription: "",
+      incomeValue: "",
       leftDrawerOpen: false,
-      essentialLinks: linksData
-    }
-  }
-}
+      essentialLinks: linksData,
+      prompt: false,
+    };
+  },
+  methods: {
+    changeTheme() {
+      this.$store.commit("changeTheme");
+    },
+    add() {
+      this.items.push({
+        incomeDescription: this.incomeDescription,
+        incomeValue: this.incomeValue,
+      });
+    },
+  },
+  computed: {
+    ...mapFields(["items"]),
+  },
+};
 </script>
